@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Movies from "./components/Movies";
+import TrendingNow from "./components/TrendingNow";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
         <Header />
         <Hero />
-        <Movies />
+        <TrendingNow />
       </div>
     </main>
   );
