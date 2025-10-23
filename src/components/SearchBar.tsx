@@ -26,6 +26,13 @@ const SearchBar = () => {
     }
   }, [debouncedQuery]);
 
+  const handleBlur = () => {
+    setShouldShowSearch(false);
+  };
+  const handleSearchClick = () => {
+    setShouldShowSearch(true);
+  };
+
   const searchQuery = (query: string) => {
     // Implement your search logic here
     const results = MOVIE_DATA.results.filter((movie: Movie) =>
@@ -44,19 +51,29 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex items-center gap-2">
-      {shouldShowSearch && (
-        <input
-          className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-600"
-          type="text"
-          placeholder="Search"
-          onChange={handleSearchQueryChange}
-        />
+    <div className="flex items-center">
+      {shouldShowSearch ? (
+        <div className="flex items-center bg-black/80 border border-white/20 rounded-sm px-3 py-2 min-w-[280px] backdrop-blur-sm">
+          <Search size={20} className="text-white/70 mr-3 flex-shrink-0" />
+          <input
+            className="bg-transparent text-white placeholder:text-white/60 text-sm focus:outline-none flex-1 font-normal"
+            type="text"
+            placeholder="Titles, people, genres"
+            aria-label="Search"
+            onChange={handleSearchQueryChange}
+            onBlur={handleBlur}
+            autoFocus
+          />
+        </div>
+      ) : (
+        <button
+          onClick={handleSearchClick}
+          className="p-2 hover:bg-white/10 rounded-sm transition-colors duration-200"
+          aria-label="Search"
+        >
+          <Search size={24} className="text-white" />
+        </button>
       )}
-
-      <button onClick={() => setShouldShowSearch(true)}>
-        <Search />
-      </button>
     </div>
   );
 };
